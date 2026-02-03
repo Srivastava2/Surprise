@@ -9,12 +9,60 @@
     <style>
         body {
             margin: 0;
-            /* Restored your previous background gradient */
-            background: linear-gradient(135deg, #f5deb3, #fff1d6);
             font-family: 'Caveat', cursive;
             color: #5a3e1b;
             min-height: 100vh;
             overflow-x: hidden;
+            background: linear-gradient(135deg, #f5deb3, #fff1d6);
+        }
+
+        /* Background Video */
+        #bgVideo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        /* Warm overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(245, 222, 179, 0.55);
+            z-index: -1;
+        }
+
+        /* Open Me Overlay */
+        #overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            transition: opacity 0.6s ease;
+        }
+
+        #openBtn {
+            font-family: 'Great Vibes', cursive;
+            font-size: 48px;
+            padding: 20px 60px;
+            border: none;
+            border-radius: 50px;
+            background: #ffb703;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease;
+        }
+
+        #openBtn:hover {
+            transform: scale(1.08);
         }
 
         h1 {
@@ -24,13 +72,11 @@
             margin: 30px 0;
         }
 
-        /* Fixed the 'too large' issue by using a flexible container */
         .canvas {
             position: relative;
             max-width: 900px;
             margin: 0 auto;
-            /* This ensures the area stays within view */
-            height: 750px; 
+            height: 750px;
         }
 
         .scrap {
@@ -46,49 +92,40 @@
             z-index: 50 !important;
         }
 
-        /* Top Left Box */
         .box-top-left {
             top: 20px;
             left: 20px;
             width: 250px;
             padding: 20px;
-            z-index: 1;
         }
 
-        /* Top Right Image */
         .photo-top-right {
             top: 0px;
             right: 80px;
-            width: 180px;
+            width: 200px;
             padding: 10px 10px 40px 10px;
             transform: rotate(8deg);
-            z-index: 2;
         }
 
-        /* Bottom Left Image */
         .photo-bottom-left {
             bottom: 100px;
             left: 40px;
             width: 280px;
             padding: 10px 10px 40px 10px;
             transform: rotate(-6deg);
-            z-index: 4;
         }
 
-        /* Bottom Right Shayari */
         .box-bottom-right {
             bottom: 50px;
             right: 20px;
             width: 380px;
             padding: 25px;
-            z-index: 3;
         }
 
         img {
             width: 100%;
             height: auto;
             display: block;
-            /* Placeholder styling if image fails */
             background: #eee;
             min-height: 150px;
         }
@@ -99,6 +136,17 @@
             line-height: 1.6;
             text-align: center;
             margin: 0;
+        }
+
+        .scribble {
+            position: absolute;
+            top: 350px;
+            left: 30%;
+            width: 150px;
+            height: 1px;
+            background: #5a3e1b;
+            opacity: 0.2;
+            transform: rotate(-20deg);
         }
 
         #cakeBtn {
@@ -114,27 +162,29 @@
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-
-        /* Decorative line from sketch */
-        .scribble {
-            position: absolute;
-            top: 350px;
-            left: 30%;
-            width: 150px;
-            height: 1px;
-            background: #5a3e1b;
-            opacity: 0.2;
-            transform: rotate(-20deg);
-        }
     </style>
 </head>
 <body>
+
+    <!-- Background Video (LOOP ENABLED) -->
+    <video id="bgVideo" playsinline loop>
+        <source src="video.mp4" type="video/mp4">
+    </video>
+
+    <!-- Open Me Overlay -->
+    <div id="overlay">
+        <button id="openBtn">Open me 💙</button>
+    </div>
 
     <h1>Whispers & Words 💌</h1>
 
     <div class="canvas">
         <div class="scrap box-top-left">
-            <p>They say perfection doesn't exist, but they haven't seen the way the light catches your eyes. I am not asking to just be a part of your life; I am asking to be the one who ensures your life is as beautiful as the heart you carry ✨</p>
+            <p>
+                They say perfection doesn't exist, but they haven't seen the way the light catches your eyes.
+                I am not asking to just be a part of your life; I am asking to be the one who ensures your life
+                is as beautiful as the heart you carry ✨
+            </p>
         </div>
 
         <div class="scrap photo-top-right">
@@ -157,7 +207,23 @@
         </div>
     </div>
 
-    <button id="cakeBtn" onclick="window.location.href='cake.html'">Now, make a wish 🎂</button>
+    <button id="cakeBtn" onclick="window.location.href='cake.html'">
+        Now, make a wish 🎂
+    </button>
+
+    <script>
+        const video = document.getElementById("bgVideo");
+        const overlay = document.getElementById("overlay");
+        const openBtn = document.getElementById("openBtn");
+
+        openBtn.addEventListener("click", () => {
+            video.play();
+            overlay.style.opacity = "0";
+            setTimeout(() => {
+                overlay.style.display = "none";
+            }, 600);
+        });
+    </script>
 
 </body>
 </html>
