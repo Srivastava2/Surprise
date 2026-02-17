@@ -2,21 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Whispers & Words 💌</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,600&family=Noto+Sans+Devanagari:wght@400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
 
     <style>
-        /* --- Full Screen Video Background --- */
-        body, html {
+        /* --- Core Layout --- */
+        html, body {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow: hidden; /* Prevents scrolling to keep the 'card' look */
+            background: #000;
         }
 
+        /* --- True Fullscreen Video --- */
         #bgVideo {
             position: fixed;
             top: 50%;
@@ -25,132 +27,143 @@
             min-height: 100%;
             width: auto;
             height: auto;
-            z-index: -2;
             transform: translate(-50%, -50%);
-            object-fit: cover; /* Ensures video covers screen without distortion */
+            z-index: -2;
+            object-fit: cover;
         }
 
-        /* Warm overlay to make text readable against the video */
         .overlay-tint {
             position: fixed;
             inset: 0;
-            background: rgba(85, 68, 45, 0.4); /* Darker gold/brown tint */
+            background: rgba(0, 0, 0, 0.3); /* Slight darkening for text contrast */
             z-index: -1;
         }
 
-        /* --- Content Layout --- */
-        .main-container {
+        /* --- Scaling Canvas --- */
+        .wrapper {
             position: relative;
-            z-index: 1;
-            min-height: 100vh;
+            width: 100vw;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
-            box-sizing: border-box;
+            justify-content: center;
         }
 
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(32px, 8vw, 52px); /* Responsive font size */
+            font-size: clamp(24px, 6vw, 42px);
             color: #fff;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-            margin: 40px 0;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+            margin: 20px 0;
+            z-index: 10;
         }
 
-        /* --- The Scrapbook Canvas --- */
         .canvas {
             position: relative;
-            width: 100%;
-            max-width: 800px;
-            height: 650px; /* Base height for desktop */
-            margin-bottom: 40px;
+            width: 95vw;
+            max-width: 900px;
+            height: 70vh; /* Fixed height relative to screen */
+            margin: 0 auto;
         }
 
+        /* --- The Scraps (Using % for identical layout) --- */
         .scrap {
             position: absolute;
-            background: #ffffff;
-            padding: 15px;
-            box-shadow: 10px 10px 25px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.2);
+            background: #fff;
+            padding: 1.5%;
+            box-shadow: 8px 8px 20px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: transform 0.3s;
         }
 
-        .scrap img {
+        /* Exact Desktop Positions applied via Percentages */
+        .box-top-left {
+            top: 5%;
+            left: 2%;
+            width: 35%;
+            transform: rotate(-4deg);
+            z-index: 4;
+        }
+
+        .photo-top-right {
+            top: 2%;
+            right: 5%;
+            width: 30%;
+            padding-bottom: 6%; /* Polaroid look */
+            transform: rotate(6deg);
+            z-index: 3;
+        }
+
+        .photo-bottom-left {
+            bottom: 15%;
+            left: 5%;
+            width: 35%;
+            padding-bottom: 7%;
+            transform: rotate(-6deg);
+            z-index: 2;
+        }
+
+        .box-bottom-right {
+            bottom: 5%;
+            right: 2%;
+            width: 45%;
+            transform: rotate(3deg);
+            z-index: 5;
+        }
+
+        img {
             width: 100%;
             height: auto;
             display: block;
         }
 
-        /* Desktop Positioning */
-        .text-top { top: 10%; left: 5%; width: 220px; transform: rotate(-3deg); }
-        .pic-top { top: 5%; right: 5%; width: 180px; transform: rotate(5deg); padding-bottom: 40px; }
-        .pic-bottom { bottom: 15%; left: 8%; width: 220px; transform: rotate(-5deg); padding-bottom: 40px; }
-        .hindi-bottom { bottom: 10%; right: 5%; width: 280px; transform: rotate(2deg); }
-
         .hindi-text {
             font-family: 'Noto Sans Devanagari', sans-serif;
-            font-size: 18px;
+            font-size: clamp(10px, 2.5vw, 18px);
+            line-height: 1.5;
             text-align: center;
-            color: #333;
+            margin: 0;
         }
 
-        /* --- Button Styling --- */
-        #cakeBtn {
-            padding: 15px 40px;
+        p {
             font-family: 'Caveat', cursive;
-            font-size: 24px;
+            font-size: clamp(12px, 3vw, 20px);
+            margin: 0;
+        }
+
+        /* --- Footer Button --- */
+        #cakeBtn {
+            margin-top: 20px;
+            padding: 10px 30px;
+            font-family: 'Caveat', cursive;
+            font-size: 22px;
             background: #ffb703;
             color: #fff;
             border: none;
-            border-radius: 50px;
+            border-radius: 25px;
             cursor: pointer;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            margin-bottom: 50px;
+            z-index: 10;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
-        /* --- MOBILE RESPONSIVE FIXES --- */
-        @media (max-width: 600px) {
-            .canvas {
-                height: auto;
-                display: flex;
-                flex-direction: column;
-                gap: 30px;
-                align-items: center;
-            }
-
-            .scrap {
-                position: relative; /* Un-stack them for small screens */
-                top: 0 !important;
-                left: 0 !important;
-                right: 0 !important;
-                bottom: 0 !important;
-                width: 85% !important;
-                transform: rotate(0deg) !important; /* Straighter for mobile readability */
-                margin: 0 auto;
-            }
-
-            .scrap:nth-child(even) { transform: rotate(2deg) !important; }
-            .scrap:nth-child(odd) { transform: rotate(-2deg) !important; }
-        }
-
-        /* --- Entry Overlay --- */
+        /* --- Overlay --- */
         #intro-overlay {
             position: fixed;
             inset: 0;
-            background: #1a1a1a;
-            z-index: 1000;
+            background: rgba(0,0,0,0.9);
+            z-index: 100;
             display: flex;
-            justify-content: center;
             align-items: center;
-            transition: opacity 0.8s ease;
+            justify-content: center;
+            transition: opacity 0.6s;
         }
     </style>
 </head>
 <body>
 
     <div id="intro-overlay">
-        <button id="cakeBtn" style="font-size: 40px;" onclick="startExperience()">Open me 💙</button>
+        <button id="cakeBtn" style="font-size: 35px;" onclick="start()">Open me 💙</button>
     </div>
 
     <video id="bgVideo" playsinline loop muted>
@@ -158,25 +171,23 @@
     </video>
     <div class="overlay-tint"></div>
 
-    <div class="main-container">
+    <div class="wrapper">
         <h1>Whispers & Words 💌</h1>
 
         <div class="canvas">
-            <div class="scrap text-top">
-                <p style="font-family: 'Caveat'; font-size: 20px;">
-                    They say perfection doesn't exist, but they haven't seen the way the light catches your eyes... ✨
-                </p>
+            <div class="scrap box-top-left">
+                <p>They say perfection doesn't exist, but they haven't seen the way the light catches your eyes. ✨</p>
             </div>
 
-            <div class="scrap pic-top">
+            <div class="scrap photo-top-right">
                 <img src="ap.jpg.jpeg" alt="Memory 1">
             </div>
 
-            <div class="scrap pic-bottom">
+            <div class="scrap photo-bottom-left">
                 <img src="pa.jpg.jpeg" alt="Memory 2">
             </div>
 
-            <div class="scrap hindi-bottom">
+            <div class="scrap box-bottom-right">
                 <p class="hindi-text">
                     ख़ूबसूरती तो बहुत है इस संसार में,<br>
                     पर मेरी आँखों को बस तेरा इंतज़ार है। ✨
@@ -190,17 +201,12 @@
     </div>
 
     <script>
-        function startExperience() {
-            const video = document.getElementById("bgVideo");
-            const overlay = document.getElementById("intro-overlay");
-            
-            video.muted = false; // Enable sound if the user clicks
-            video.play();
-            
-            overlay.style.opacity = "0";
-            setTimeout(() => {
-                overlay.style.display = "none";
-            }, 800);
+        function start() {
+            const v = document.getElementById('bgVideo');
+            v.muted = false;
+            v.play();
+            document.getElementById('intro-overlay').style.opacity = '0';
+            setTimeout(() => { document.getElementById('intro-overlay').style.display = 'none'; }, 600);
         }
     </script>
 </body>
