@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Whispers & Words 💌</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,600&family=Noto+Sans+Devanagari:wght@400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
@@ -11,7 +12,7 @@
             margin: 0;
             font-family: 'Caveat', cursive;
             color: #5a3e1b;
-            overflow-x: auto;
+            overflow-x: hidden;
         }
 
         /* ===== Background Video ===== */
@@ -25,11 +26,10 @@
             z-index: -3;
         }
 
-        /* Soft warm overlay above video */
         .video-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(245, 222, 179, 0.45);
+            background: rgba(0, 0, 0, 0.35);
             z-index: -2;
         }
 
@@ -71,56 +71,59 @@
             z-index: 2;
         }
 
-        /* ===== Scrapbook Layout ===== */
+        /* ===== Canvas ===== */
         .canvas {
             position: relative;
-            width: 1000px;
-            height: 750px;
-            margin: 0 auto 60px auto;
-            z-index: 2; /* important: above video */
+            width: 100%;
+            height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            z-index: 2;
         }
 
+        /* ===== Scrap Cards ===== */
         .scrap {
             position: absolute;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(4px);
-            box-shadow: 6px 6px 25px rgba(0,0,0,0.2);
-            border: 1px solid rgba(0,0,0,0.05);
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+            border-radius: 18px;
             transition: transform 0.3s ease;
         }
 
         .scrap:hover {
-            transform: scale(1.05) rotate(0deg) !important;
-            z-index: 50 !important;
+            transform: scale(1.05);
+            z-index: 50;
         }
 
         .box-top-left {
-            top: 20px;
-            left: 20px;
-            width: 250px;
+            top: 12%;
+            left: 8%;
+            width: 260px;
             padding: 20px;
         }
 
         .photo-top-right {
-            top: 0px;
-            right: 80px;
-            width: 200px;
+            top: 10%;
+            right: 10%;
+            width: 220px;
             padding: 10px 10px 40px 10px;
-            transform: rotate(8deg);
+            transform: rotate(6deg);
         }
 
         .photo-bottom-left {
-            bottom: 100px;
-            left: 40px;
+            bottom: 15%;
+            left: 10%;
             width: 280px;
             padding: 10px 10px 40px 10px;
-            transform: rotate(-6deg);
+            transform: rotate(-5deg);
         }
 
         .box-bottom-right {
-            bottom: 50px;
-            right: 20px;
-            width: 380px;
+            bottom: 12%;
+            right: 8%;
+            width: 360px;
             padding: 25px;
         }
 
@@ -128,8 +131,7 @@
             width: 100%;
             height: auto;
             display: block;
-            background: #eee;
-            min-height: 150px;
+            border-radius: 10px;
         }
 
         .hindi-text {
@@ -140,20 +142,9 @@
             margin: 0;
         }
 
-        .scribble {
-            position: absolute;
-            top: 350px;
-            left: 30%;
-            width: 150px;
-            height: 1px;
-            background: #5a3e1b;
-            opacity: 0.2;
-            transform: rotate(-20deg);
-        }
-
         #cakeBtn {
             display: block;
-            margin: 20px auto 50px auto;
+            margin: 30px auto 50px auto;
             padding: 12px 30px;
             font-family: 'Caveat', cursive;
             font-size: 22px;
@@ -162,22 +153,40 @@
             border: none;
             border-radius: 25px;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             position: relative;
             z-index: 2;
+        }
+
+        /* ===== Mobile Layout ===== */
+        @media (max-width: 768px) {
+
+            .canvas {
+                height: 120vh;
+            }
+
+            .scrap {
+                width: 75% !important;
+                left: 50% !important;
+                right: auto !important;
+                transform: translateX(-50%) rotate(0deg) !important;
+            }
+
+            .box-top-left { top: 8%; }
+            .photo-top-right { top: 28%; }
+            .photo-bottom-left { top: 52%; }
+            .box-bottom-right { top: 76%; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Video -->
     <video id="bgVideo" playsinline loop muted>
         <source src="video.mp4" type="video/mp4">
     </video>
 
     <div class="video-overlay"></div>
 
-    <!-- Open Me Overlay -->
     <div id="overlay">
         <button id="openBtn">Open me 💙</button>
     </div>
@@ -185,6 +194,7 @@
     <h1>Whispers & Words 💌</h1>
 
     <div class="canvas">
+
         <div class="scrap box-top-left">
             <p>
                 They say perfection doesn't exist, but they haven't seen the way the light catches your eyes.
@@ -196,8 +206,6 @@
         <div class="scrap photo-top-right">
             <img src="ap.jpg.jpeg" alt="Memory 1">
         </div>
-
-        <div class="scribble"></div>
 
         <div class="scrap photo-bottom-left">
             <img src="pa.jpg.jpeg" alt="Memory 2">
@@ -211,6 +219,7 @@
                 पर मेरे लिए तो तू ही आराध्य है। ✨
             </p>
         </div>
+
     </div>
 
     <button id="cakeBtn" onclick="window.location.href='cake.html'">
