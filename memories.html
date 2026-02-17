@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Whispers & Words 💌</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,600&family=Noto+Sans+Devanagari:wght@400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
@@ -13,7 +12,7 @@
             font-family: 'Caveat', cursive;
             color: #5a3e1b;
             min-height: 100vh;
-            overflow-x: hidden;
+            overflow-x: auto; /* allow horizontal scroll on mobile */
             background: linear-gradient(135deg, #f5deb3, #fff1d6);
         }
 
@@ -70,12 +69,12 @@
             margin: 30px 0;
         }
 
-        /* ===== Desktop Layout ===== */
+        /* Fixed scrapbook layout */
         .canvas {
             position: relative;
-            max-width: 900px;
-            margin: 0 auto;
+            width: 1000px;  /* fixed width */
             height: 750px;
+            margin: 0 auto;
         }
 
         .scrap {
@@ -160,40 +159,6 @@
             border-radius: 25px;
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        /* ===== Mobile Layout ===== */
-        @media (max-width: 768px) {
-
-            h1 {
-                font-size: 28px;
-                padding: 0 15px;
-            }
-
-            .canvas {
-                position: static;
-                height: auto;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 25px;
-                padding: 0 15px;
-            }
-
-            .scrap {
-                position: static;
-                width: 100% !important;
-                transform: none !important;
-            }
-
-            .scribble {
-                display: none;
-            }
-
-            #openBtn {
-                font-size: 30px;
-                padding: 15px 40px;
-            }
         }
     </style>
 </head>
