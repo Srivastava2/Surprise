@@ -8,8 +8,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,600&family=Noto+Sans+Devanagari:wght@400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
 
     <style>
+        /* --- General Reset & Body --- */
         body {
             margin: 0;
+            padding: 0;
             font-family: 'Caveat', cursive;
             color: #5a3e1b;
             min-height: 100vh;
@@ -17,6 +19,7 @@
             background: linear-gradient(135deg, #f5deb3, #fff1d6);
         }
 
+        /* --- Background Video & Overlays --- */
         #bgVideo {
             position: fixed;
             top: 0;
@@ -35,15 +38,17 @@
             z-index: -1;
         }
 
+        /* --- Landing Overlay --- */
         #overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.75);
+            background: rgba(0, 0, 0, 0.8);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 100;
-            transition: opacity 0.6s ease;
+            transition: opacity 0.8s ease;
+            user-select: none;
         }
 
         #openBtn {
@@ -56,69 +61,86 @@
             color: #fff;
             cursor: pointer;
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, background 0.3s ease;
         }
 
         #openBtn:hover {
             transform: scale(1.08);
+            background: #fb8500;
         }
 
+        /* --- Typography --- */
         h1 {
             text-align: center;
             font-family: 'Playfair Display', serif;
-            font-size: 42px;
-            margin: 30px 0;
+            font-size: 48px;
+            margin: 40px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
-        /* ===== Desktop Layout ===== */
+        .hindi-text {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+            font-size: 20px;
+            line-height: 1.8;
+            text-align: center;
+            margin: 0;
+        }
+
+        /* --- Scrapbook Canvas --- */
         .canvas {
             position: relative;
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
-            height: 750px;
+            height: 800px;
         }
 
         .scrap {
             position: absolute;
             background: #ffffff;
             box-shadow: 6px 6px 20px rgba(0,0,0,0.15);
-            transition: transform 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid rgba(0,0,0,0.05);
+            overflow: hidden;
         }
 
         .scrap:hover {
             transform: scale(1.05) rotate(0deg) !important;
             z-index: 50 !important;
+            box-shadow: 10px 10px 30px rgba(0,0,0,0.2);
         }
 
+        /* --- Individual Scrap Pieces --- */
         .box-top-left {
-            top: 20px;
-            left: 20px;
-            width: 250px;
-            padding: 20px;
+            top: 40px;
+            left: 40px;
+            width: 280px;
+            padding: 25px;
+            transform: rotate(-2deg);
+            font-size: 22px;
         }
 
         .photo-top-right {
-            top: 0px;
-            right: 80px;
-            width: 200px;
-            padding: 10px 10px 40px 10px;
-            transform: rotate(8deg);
+            top: 20px;
+            right: 100px;
+            width: 220px;
+            padding: 12px 12px 45px 12px;
+            transform: rotate(6deg);
         }
 
         .photo-bottom-left {
-            bottom: 100px;
-            left: 40px;
-            width: 280px;
-            padding: 10px 10px 40px 10px;
-            transform: rotate(-6deg);
+            bottom: 120px;
+            left: 60px;
+            width: 300px;
+            padding: 12px 12px 45px 12px;
+            transform: rotate(-5deg);
         }
 
         .box-bottom-right {
-            bottom: 50px;
-            right: 20px;
-            width: 380px;
-            padding: 25px;
+            bottom: 60px;
+            right: 40px;
+            width: 400px;
+            padding: 30px;
+            transform: rotate(2deg);
         }
 
         img {
@@ -126,80 +148,46 @@
             height: auto;
             display: block;
             background: #eee;
-            min-height: 150px;
-        }
-
-        .hindi-text {
-            font-family: 'Noto Sans Devanagari', sans-serif;
-            font-size: 19px;
-            line-height: 1.6;
-            text-align: center;
-            margin: 0;
+            filter: sepia(20%);
         }
 
         .scribble {
             position: absolute;
-            top: 350px;
-            left: 30%;
-            width: 150px;
-            height: 1px;
+            top: 380px;
+            left: 35%;
+            width: 180px;
+            height: 2px;
             background: #5a3e1b;
-            opacity: 0.2;
-            transform: rotate(-20deg);
+            opacity: 0.15;
+            transform: rotate(-15deg);
         }
 
+        /* --- Footer Button --- */
         #cakeBtn {
             display: block;
-            margin: 20px auto 50px auto;
-            padding: 12px 30px;
+            margin: 40px auto 80px auto;
+            padding: 15px 40px;
             font-family: 'Caveat', cursive;
-            font-size: 22px;
+            font-size: 26px;
             background: #ffb703;
             color: #fff;
             border: none;
-            border-radius: 25px;
+            border-radius: 30px;
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
 
-        /* ===== Mobile Layout ===== */
-        @media (max-width: 768px) {
-
-            h1 {
-                font-size: 28px;
-                padding: 0 15px;
-            }
-
-            .canvas {
-                position: static;
-                height: auto;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 25px;
-                padding: 0 15px;
-            }
-
-            .scrap {
-                position: static;
-                width: 100% !important;
-                transform: none !important;
-            }
-
-            .scribble {
-                display: none;
-            }
-
-            #openBtn {
-                font-size: 30px;
-                padding: 15px 40px;
-            }
+        #cakeBtn:hover {
+            background: #fb8500;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
     </style>
 </head>
 <body>
 
-    <video id="bgVideo" playsinline loop>
+    <video id="bgVideo" playsinline loop muted>
         <source src="video.mp4" type="video/mp4">
     </video>
 
@@ -209,34 +197,34 @@
 
     <h1>Whispers & Words 💌</h1>
 
-    <div class="canvas">
-        <div class="scrap box-top-left">
+    <main class="canvas">
+        <article class="scrap box-top-left">
             <p>
                 They say perfection doesn't exist, but they haven't seen the way the light catches your eyes.
                 I am not asking to just be a part of your life; I am asking to be the one who ensures your life
                 is as beautiful as the heart you carry ✨
             </p>
-        </div>
+        </article>
 
-        <div class="scrap photo-top-right">
+        <figure class="scrap photo-top-right">
             <img src="ap.jpg.jpeg" alt="Memory 1">
-        </div>
+        </figure>
 
         <div class="scribble"></div>
 
-        <div class="scrap photo-bottom-left">
+        <figure class="scrap photo-bottom-left">
             <img src="pa.jpg.jpeg" alt="Memory 2">
-        </div>
+        </figure>
 
-        <div class="scrap box-bottom-right">
+        <article class="scrap box-bottom-right">
             <p class="hindi-text">
                 ख़ूबसूरती तो बहुत है इस संसार में,<br>
                 पर मेरी आँखों को बस तेरा इंतज़ार है।<br>
                 होंगी बहुत सारी गोपिया सुंदर,<br>
                 पर मेरे लिए तो तू ही आराध्य है। ✨
             </p>
-        </div>
-    </div>
+        </article>
+    </main>
 
     <button id="cakeBtn" onclick="window.location.href='cake.html'">
         Now, make a wish 🎂
@@ -248,11 +236,14 @@
         const openBtn = document.getElementById("openBtn");
 
         openBtn.addEventListener("click", () => {
+            // Unmute if you want sound, or keep muted for autoplay compliance
+            video.muted = false; 
             video.play();
+            
             overlay.style.opacity = "0";
             setTimeout(() => {
                 overlay.style.display = "none";
-            }, 600);
+            }, 800);
         });
     </script>
 
