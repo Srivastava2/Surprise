@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Whispers & Words 💌</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,600&family=Noto+Sans+Devanagari:wght@400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
@@ -16,7 +17,6 @@
             background: linear-gradient(135deg, #f5deb3, #fff1d6);
         }
 
-        /* Background Video */
         #bgVideo {
             position: fixed;
             top: 0;
@@ -27,7 +27,6 @@
             z-index: -2;
         }
 
-        /* Warm overlay */
         body::before {
             content: "";
             position: fixed;
@@ -36,7 +35,6 @@
             z-index: -1;
         }
 
-        /* Open Me Overlay */
         #overlay {
             position: fixed;
             inset: 0;
@@ -72,6 +70,7 @@
             margin: 30px 0;
         }
 
+        /* ===== Desktop Layout ===== */
         .canvas {
             position: relative;
             max-width: 900px;
@@ -162,16 +161,48 @@
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
+
+        /* ===== Mobile Layout ===== */
+        @media (max-width: 768px) {
+
+            h1 {
+                font-size: 28px;
+                padding: 0 15px;
+            }
+
+            .canvas {
+                position: static;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 25px;
+                padding: 0 15px;
+            }
+
+            .scrap {
+                position: static;
+                width: 100% !important;
+                transform: none !important;
+            }
+
+            .scribble {
+                display: none;
+            }
+
+            #openBtn {
+                font-size: 30px;
+                padding: 15px 40px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Background Video (LOOP ENABLED) -->
     <video id="bgVideo" playsinline loop>
         <source src="video.mp4" type="video/mp4">
     </video>
 
-    <!-- Open Me Overlay -->
     <div id="overlay">
         <button id="openBtn">Open me 💙</button>
     </div>
