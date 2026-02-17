@@ -12,10 +12,11 @@
             margin: 0;
             font-family: 'Caveat', cursive;
             color: #5a3e1b;
+            min-height: 100vh;
             overflow-x: hidden;
+            background: linear-gradient(135deg, #f5deb3, #fff1d6);
         }
 
-        /* ===== Background Video ===== */
         #bgVideo {
             position: fixed;
             top: 0;
@@ -23,17 +24,17 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: -3;
-        }
-
-        .video-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.35);
             z-index: -2;
         }
 
-        /* ===== Open Overlay ===== */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(245, 222, 179, 0.55);
+            z-index: -1;
+        }
+
         #overlay {
             position: fixed;
             inset: 0;
@@ -67,63 +68,56 @@
             font-family: 'Playfair Display', serif;
             font-size: 42px;
             margin: 30px 0;
-            position: relative;
-            z-index: 2;
         }
 
-        /* ===== Canvas ===== */
+        /* ===== Desktop Layout ===== */
         .canvas {
             position: relative;
-            width: 100%;
-            height: 100vh;
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
-            z-index: 2;
+            height: 750px;
         }
 
-        /* ===== Scrap Cards ===== */
         .scrap {
             position: absolute;
-            background: rgba(255,255,255,0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.35);
-            border-radius: 18px;
+            background: #ffffff;
+            box-shadow: 6px 6px 20px rgba(0,0,0,0.15);
             transition: transform 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         .scrap:hover {
-            transform: scale(1.05);
-            z-index: 50;
+            transform: scale(1.05) rotate(0deg) !important;
+            z-index: 50 !important;
         }
 
         .box-top-left {
-            top: 12%;
-            left: 8%;
-            width: 260px;
+            top: 20px;
+            left: 20px;
+            width: 250px;
             padding: 20px;
         }
 
         .photo-top-right {
-            top: 10%;
-            right: 10%;
-            width: 220px;
+            top: 0px;
+            right: 80px;
+            width: 200px;
             padding: 10px 10px 40px 10px;
-            transform: rotate(6deg);
+            transform: rotate(8deg);
         }
 
         .photo-bottom-left {
-            bottom: 15%;
-            left: 10%;
+            bottom: 100px;
+            left: 40px;
             width: 280px;
             padding: 10px 10px 40px 10px;
-            transform: rotate(-5deg);
+            transform: rotate(-6deg);
         }
 
         .box-bottom-right {
-            bottom: 12%;
-            right: 8%;
-            width: 360px;
+            bottom: 50px;
+            right: 20px;
+            width: 380px;
             padding: 25px;
         }
 
@@ -131,7 +125,8 @@
             width: 100%;
             height: auto;
             display: block;
-            border-radius: 10px;
+            background: #eee;
+            min-height: 150px;
         }
 
         .hindi-text {
@@ -142,9 +137,20 @@
             margin: 0;
         }
 
+        .scribble {
+            position: absolute;
+            top: 350px;
+            left: 30%;
+            width: 150px;
+            height: 1px;
+            background: #5a3e1b;
+            opacity: 0.2;
+            transform: rotate(-20deg);
+        }
+
         #cakeBtn {
             display: block;
-            margin: 30px auto 50px auto;
+            margin: 20px auto 50px auto;
             padding: 12px 30px;
             font-family: 'Caveat', cursive;
             font-size: 22px;
@@ -153,39 +159,49 @@
             border: none;
             border-radius: 25px;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            position: relative;
-            z-index: 2;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         /* ===== Mobile Layout ===== */
         @media (max-width: 768px) {
 
+            h1 {
+                font-size: 28px;
+                padding: 0 15px;
+            }
+
             .canvas {
-                height: 120vh;
+                position: static;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 25px;
+                padding: 0 15px;
             }
 
             .scrap {
-                width: 75% !important;
-                left: 50% !important;
-                right: auto !important;
-                transform: translateX(-50%) rotate(0deg) !important;
+                position: static;
+                width: 100% !important;
+                transform: none !important;
             }
 
-            .box-top-left { top: 8%; }
-            .photo-top-right { top: 28%; }
-            .photo-bottom-left { top: 52%; }
-            .box-bottom-right { top: 76%; }
+            .scribble {
+                display: none;
+            }
+
+            #openBtn {
+                font-size: 30px;
+                padding: 15px 40px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <video id="bgVideo" playsinline loop muted>
+    <video id="bgVideo" playsinline loop>
         <source src="video.mp4" type="video/mp4">
     </video>
-
-    <div class="video-overlay"></div>
 
     <div id="overlay">
         <button id="openBtn">Open me 💙</button>
@@ -194,7 +210,6 @@
     <h1>Whispers & Words 💌</h1>
 
     <div class="canvas">
-
         <div class="scrap box-top-left">
             <p>
                 They say perfection doesn't exist, but they haven't seen the way the light catches your eyes.
@@ -206,6 +221,8 @@
         <div class="scrap photo-top-right">
             <img src="ap.jpg.jpeg" alt="Memory 1">
         </div>
+
+        <div class="scribble"></div>
 
         <div class="scrap photo-bottom-left">
             <img src="pa.jpg.jpeg" alt="Memory 2">
@@ -219,7 +236,6 @@
                 पर मेरे लिए तो तू ही आराध्य है। ✨
             </p>
         </div>
-
     </div>
 
     <button id="cakeBtn" onclick="window.location.href='cake.html'">
